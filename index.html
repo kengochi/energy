@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>エネルギートラッカー｜自分が輝く関係性を見つける</title>
+  <style>
+    /* ===== リセット & ベース ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      background: #FAFAF8;
+      color: #2D3748;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    /* ===== ユーティリティ ===== */
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; }
+    .section--alt { background: #F0F4F8; }
+
+    /* ===== ヒーロー ===== */
+    .hero {
+      background: linear-gradient(135deg, #1A202C 0%, #2D3748 60%, #4A5568 100%);
+      color: #fff;
+      padding: 100px 0 80px;
+      text-align: center;
+    }
+    .hero__eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.15);
+      border-radius: 100px;
+      padding: 4px 16px;
+      margin-bottom: 24px;
+      color: #90CDF4;
+    }
+    .hero__title {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+    .hero__title em {
+      font-style: normal;
+      color: #63B3ED;
+    }
+    .hero__sub {
+      font-size: 17px;
+      color: #CBD5E0;
+      max-width: 520px;
+      margin: 0 auto 40px;
+      line-height: 1.9;
+    }
+    .hero__cta {
+      display: inline-block;
+      background: #4299E1;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      box-shadow: 0 4px 20px rgba(66,153,225,0.4);
+    }
+    .hero__cta:hover { background: #3182CE; transform: translateY(-2px); }
+
+    /* ===== 問い（共感セクション） ===== */
+    .question__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 40px 0;
+    }
+    .question__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .question__item::before {
+      content: "？";
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: #EBF8FF;
+      color: #3182CE;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .section__lead {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .section__body {
+      font-size: 15px;
+      color: #4A5568;
+      line-height: 1.9;
+    }
+
+    /* ===== コンセプト ===== */
+    .concept__block {
+      background: #fff;
+      border-radius: 16px;
+      padding: 36px 40px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      margin-top: 40px;
+    }
+    .concept__quote {
+      font-size: 17px;
+      font-weight: 700;
+      color: #2B6CB0;
+      border-left: 4px solid #4299E1;
+      padding-left: 20px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .concept__body {
+      font-size: 15px;
+      color: #4A5568;
+      line-height: 1.9;
+    }
+    .concept__body + .concept__body { margin-top: 16px; }
+
+    /* ===== 使い方 ===== */
+    .how__steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 40px;
+      position: relative;
+    }
+    .how__steps::before {
+      content: "";
+      position: absolute;
+      left: 23px;
+      top: 28px;
+      bottom: 28px;
+      width: 2px;
+      background: #BEE3F8;
+    }
+    .how__step {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 20px 0;
+    }
+    .how__step-num {
+      flex-shrink: 0;
+      width: 48px;
+      height: 48px;
+      background: #4299E1;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 2px 8px rgba(66,153,225,0.3);
+    }
+    .how__step-content { padding-top: 10px; }
+    .how__step-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .how__step-body {
+      font-size: 14px;
+      color: #4A5568;
+      line-height: 1.8;
+    }
+    .how__step-badge {
+      display: inline-block;
+      font-size: 11px;
+      background: #EBF8FF;
+      color: #2B6CB0;
+      border-radius: 100px;
+      padding: 2px 10px;
+      margin-left: 8px;
+      font-weight: 600;
+    }
+
+    /* ===== 発見できること ===== */
+    .discover__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    @media (max-width: 560px) { .discover__grid { grid-template-columns: 1fr; } }
+    .discover__card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+    .discover__card-icon { font-size: 28px; margin-bottom: 12px; }
+    .discover__card-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .discover__card-body { font-size: 13px; color: #4A5568; line-height: 1.8; }
+
+    /* ===== こんな人に ===== */
+    .target__list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .target__item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+    }
+    .target__item::before {
+      content: "✓";
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      background: #C6F6D5;
+      color: #276749;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      background: linear-gradient(135deg, #2B6CB0 0%, #4299E1 100%);
+      color: #fff;
+      text-align: center;
+      padding: 80px 0;
+    }
+    .cta-section__title {
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .cta-section__sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 40px;
+      line-height: 1.9;
+    }
+    .cta-section__btn {
+      display: inline-block;
+      background: #fff;
+      color: #2B6CB0;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 40px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+    .cta-section__btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.2); }
+    .cta-section__note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ===== セクションタイトル ===== */
+    .section-title {
+      font-size: clamp(22px, 3.5vw, 30px);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .section-title__sub {
+      font-size: 14px;
+      color: #4299E1;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* ===== フッター ===== */
+    footer {
+      background: #1A202C;
+      color: #718096;
+      text-align: center;
+      padding: 32px 24px;
+      font-size: 13px;
+    }
+
+    /* ===== ナビ ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26,32,44,0.95);
+      backdrop-filter: blur(8px);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav__logo {
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .nav__logo span { color: #63B3ED; }
+    .nav__cta {
+      background: #4299E1;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav__cta:hover { background: #3182CE; }
+
+    /* ===== アニメーション ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ナビ -->
+<nav>
+  <div class="nav__logo">⚡ <span>エネルギー</span>トラッカー</div>
+  <a href="#download" class="nav__cta">無料で試す</a>
+</nav>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__eyebrow">Beta版・無料公開中</div>
+    <h1 class="hero__title">
+      「なぜか充実した」<br>
+      その瞬間に、<em>あなたの本当の強み</em>が隠れている。
+    </h1>
+    <p class="hero__sub">
+      スキルや資格ではなく、<br>
+      「どんな関係性・役割の中にいる時に自分が輝くのか」を<br>
+      日々の記録から発見するツールです。
+    </p>
+    <a href="#download" class="hero__cta">スプレッドシートを無料で入手する</a>
+  </div>
+</section>
+
+<!-- 共感セクション -->
+<section class="section">
+  <div class="container fade-in">
+    <div class="section-title__sub">こんな経験、ありませんか？</div>
+    <h2 class="section-title">うまくできたはずなのに、<br>なぜか消耗した。</h2>
+    <p class="section__body">同じような仕事なのに、ある時は充実して、ある時は消耗する。その違いが、なんとなくわかっているようで、言葉にできない。</p>
+    <ul class="question__list">
+      <li class="question__item">スキルは高いはずなのに、なぜかやる気が出ない仕事がある</li>
+      <li class="question__item">「何でもできる」と言われるが、自分の本当の強みがわからない</li>
+      <li class="question__item">誰かと組んだ時だけ、不思議と力が発揮できる気がする</li>
+      <li class="question__item">「楽なことを人に任せるのは悪いことだ」という罪悪感がある</li>
+      <li class="question__item">ストレングスファインダーやMBTIをやったが、仕事に活かせていない</li>
+    </ul>
+  </div>
+</section>
+
+<!-- コンセプト -->
+<section class="section section--alt">
+  <div class="container fade-in">
+    <div class="section-title__sub">このツールのコンセプト</div>
+    <h2 class="section-title">強みは「スキル」ではなく、<br>「関係性の中」にある。</h2>
+    <div class="concept__block">
+      <p class="concept__quote">
+        「自分の強みはコンセプト発見だと気づいたのは、<br>
+        20年以上働いてからでした。<br>
+        受容的に聞いてくれる相手がいた時だけ、<br>
+        自分の発想が自由に広がっていたんです。」
+      </p>
+      <p class="concept__body">
+        既存の強み診断（ストレングスファインダー・MBTI・コンピテンシー評価）は、個人の「内面」にフォーカスしています。しかし、強みは「誰と、どんな役割分担で、どんな関係性の中にいる時に発現するか」という<strong>文脈（コンテキスト）</strong>に大きく依存します。
+      </p>
+      <p class="concept__body">
+        このツールは、日々の「エネルギーの上下」を記録し、AIとの対話を通じて「あなたが輝く関係性・構造の条件」を発見することを目的としています。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- 使い方 -->
+<section class="section">
+  <div class="container fade-in">
+    <div class="section-title__sub">使い方</div>
+    <h2 class="section-title">3つのリズムで、<br>自己理解が深まっていく。</h2>
+    <div class="how__steps">
+      <div class="how__step">
+        <div class="how__step-num">1</div>
+        <div class="how__step-content">
+          <div class="how__step-title">毎日：エネルギーを記録する <span class="how__step-badge">1分</span></div>
+          <div class="how__step-body">「⚡ 上がった」「🔋 下がった」の2択を選ぶだけ。出来事・相手・役割は任意メモ。気づきが生まれたらそのまま書く。1日何件でもOK。</div>
+        </div>
+      </div>
+      <div class="how__step">
+        <div class="how__step-num">2</div>
+        <div class="how__step-content">
+          <div class="how__step-title">毎週末：AIと3ターンのセッション <span class="how__step-badge">30分</span></div>
+          <div class="how__step-body">1週間のログをChatGPT/Claudeに貼り付け。AIが「関係性・構造」に関する仮説を提示 → 「合ってる/ちょっと違う」で回答 → 深い見立てと問い → 今週の気づきラベルを言語化。</div>
+        </div>
+      </div>
+      <div class="how__step">
+        <div class="how__step-num">3</div>
+        <div class="how__step-content">
+          <div class="how__step-title">月次・四半期：「自分のトリセツ」を育てる <span class="how__step-badge">30〜45分</span></div>
+          <div class="how__step-body">蓄積された気づきをもとに、来月の仕事設計や「理想のバディ像」を言語化。3ヶ月続けると「自分が輝く条件」が1〜2文で書けるようになります。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 発見できること -->
+<section class="section section--alt">
+  <div class="container fade-in">
+    <div class="section-title__sub">発見できること</div>
+    <h2 class="section-title">「なぜ充実したか」が、<br>言葉になる。</h2>
+    <div class="discover__grid">
+      <div class="discover__card">
+        <div class="discover__card-icon">🔍</div>
+        <div class="discover__card-title">エネルギー条件ラベル</div>
+        <div class="discover__card-body">「受容的対話」「上流専念」「参加設計」など、自分のエネルギーが上がる条件を2〜3語で言語化できます。</div>
+      </div>
+      <div class="discover__card">
+        <div class="discover__card-icon">🤝</div>
+        <div class="discover__card-title">理想のバディ像</div>
+        <div class="discover__card-body">スキルだけでなく「どんな態度・役割分担・コミュニケーションスタイルの人と組むべきか」が具体的になります。</div>
+      </div>
+      <div class="discover__card">
+        <div class="discover__card-icon">🗂️</div>
+        <div class="discover__card-title">自分のトリセツ</div>
+        <div class="discover__card-body">「私は〇〇な環境で、△△な相手と組む時に最も輝く」という1〜2文の自己定義が生まれます。</div>
+      </div>
+      <div class="discover__card">
+        <div class="discover__card-icon">🚀</div>
+        <div class="discover__card-title">手放すものの明確化</div>
+        <div class="discover__card-body">「楽なことを任せる罪悪感」から解放され、自分の強みに集中するための「手放すべき役割」が見えてきます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- こんな人に -->
+<section class="section">
+  <div class="container fade-in">
+    <div class="section-title__sub">こんな方に</div>
+    <h2 class="section-title">関係性を自分で選べる人に、<br>特に有効です。</h2>
+    <p class="section__body">このツールは、仕事の関係性・役割・チーム構成を自分でデザインできる方に特に大きな効果を発揮します。</p>
+    <ul class="target__list">
+      <li class="target__item">起業家・スタートアップの創業メンバー</li>
+      <li class="target__item">フリーランス・ソロワーカー</li>
+      <li class="target__item">副業・複業で自分のプロジェクトを持っている方</li>
+      <li class="target__item">「器用貧乏」と感じているゼネラリスト</li>
+      <li class="target__item">自分の強みを言語化したいと思っているすべての方</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="download">
+  <div class="container fade-in">
+    <h2 class="cta-section__title">まず、今週の「上がった瞬間」を<br>1つ記録してみてください。</h2>
+    <p class="cta-section__sub">
+      スプレッドシートのテンプレートを無料で配布しています。<br>
+      Googleスプレッドシートにインポートするだけで、すぐに始められます。
+    </p>
+    <a href="https://docs.google.com/spreadsheets/d/1example" class="cta-section__btn">
+      📥 スプレッドシートを入手する（無料）
+    </a>
+    <p class="cta-section__note">※ 現在はベータ版として、クローズドで配布しています。</p>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer>
+  <p>⚡ エネルギートラッカー｜Beta版</p>
+  <p style="margin-top:8px;">「自分が輝く関係性を見つける」ための自己理解ツール</p>
+</footer>
+
+<script>
+  // フェードインアニメーション
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
